@@ -23,4 +23,9 @@ for line in f:
 
 inputs = [(1,1),(3,1),(5,1),(7,1),(1,2)]
 
-print((find_answer(3,1,L)))
+sum = 1
+for t in inputs:
+	print(find_answer(t[0],t[1],L))
+	sum *= find_answer(t[0],t[1],L)
+
+print(sum)
