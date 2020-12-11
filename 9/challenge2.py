@@ -15,7 +15,6 @@ R = []
 for item in L:
 	R.append(int(item))
 
-answer = -1
 preamb = int(sys.argv[2])
 i = preamb
 while i < len(R):
@@ -24,5 +23,17 @@ while i < len(R):
 		answer = R[i]
 	i += 1
 
+found = False
 print(answer)
+for i in range(len(R)):
+	for j in range(len(R)):
+		if sum(R[i:j]) == answer and i != j:
+			range_ = R[i:j]
+			found = True
+			break
+	if found == True:
+		break
+
+answer2 = max(range_) + min(range_)
+print(answer2)
 
