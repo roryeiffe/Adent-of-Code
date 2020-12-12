@@ -3,89 +3,30 @@ import sys
 # Given seats L and cordinates i and j, construct a list of 
 # booleans of whether or not the person can see any occupied seats
 def get_adjacent_seats(L,original_i,original_j):
-	max_i = len(L) - 1
-	max_j = len(L[0]) - 1
 	seats = []
-	# up left diagonal:
-	found,i,j = False, original_i, original_j
-	while (i > 0 and j > 0):
-		if L[i-1][j-1] == "L":
-			break
-		if L[i-1][j-1] == "#":
-			found = True
-		i,j = i-1,j-1
-	seats.append(found)
-
-	# up:
-	found,i,j = False, original_i, original_j
-	while (i > 0):
-		if L[i-1][j] == "L":
-			break
-		if L[i-1][j] == "#":
-			found = True
-		i -= 1
-	seats.append(found)
-
-	# up right diagonal:
-	found,i,j = False, original_i, original_j
-	while (i > 0 and j < max_j):
-		if L[i-1][j+1] == "L":
-			break
-		if L[i-1][j+1] == "#":
-			found = True
-		i,j = i-1,j+1
-	seats.append(found)
-
-	# right:
-	found,i,j = False, original_i, original_j
-	while (j < max_j):
-		if L[i][j+1] == "L":
-			break
-		if L[i][j+1] == "#":
-			found = True
-		j += 1
-	seats.append(found)
-
-	# bottom right diagonal:
-	found,i,j = False, original_i, original_j
-	while (i < max_i and j < max_j):
-		if L[i+1][j+1] == "L":
-			break
-		if L[i+1][j+1] == "#":
-			found = True
-		i,j = i+1, j+1
-	seats.append(found)
-
-	# bottom:
-	found,i,j = False, original_i, original_j
-	while(i < max_i):
-		if L[i+1][j] == "L":
-			break
-		if L[i+1][j] == "#":
-			found = True
-		i += 1
-	seats.append(found)
-
-	# bottom left diagonal:
-	found,i,j = False, original_i, original_j
-	while(i < max_i and j > 0):
-		if L[i+1][j-1] == "L":
-			break
-		if L[i+1][j-1] == "#":
-			found = True
-		i,j = i+1,j-1
-	seats.append(found)
-
-	# left:
-	found,i,j = False, original_i, original_j
-	while (j > 0):
-		if L[i][j-1] == "L":
-			break
-		if L[i][j-1] == "#":
-			found = True
-		j -= 1
-	seats.append(found)
-
+	increments = [(-1,-1),(-1,0),(-1,1),(0,1),(1,1),(1,0),(1,-1),(0,-1)]
+	
+	for increment in increments:
+		i = original_i
+		j = original_j
+		while(True):
+			found = False
+			i += increment[0]
+			j += increment[1]
+			if i < 0 or j < 0:
+				break
+			try:
+				# if we've found an empty seat:
+				if L[i][j] == "L":
+					break
+				# if we've found an occupied seat:
+				elif L[i][j] == "#":
+					found = True
+					break
+			# If we've reached the edge of the list, that means we haven't found an occupied seat
+			except IndexError:
+				break
+		seats.append(found)
 	return seats
 
 # given list of seats, count how many are occupied:
