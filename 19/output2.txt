@@ -1,0 +1,14 @@
+This is the regex expression:
+
+
+a((aa|bb)(ab|ba)|(ab|ba)(aa|bb))b\n
+
+
+These are the expressions to match:
+
+
+ababbb
+bababa
+abbbab
+aaabbb
+aaaabbb

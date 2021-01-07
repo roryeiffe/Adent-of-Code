@@ -1,23 +1,23 @@
 import sys
 
-def find(rules, key, path):
+def find(rules, key):
 	# base case:
 	children = rules[key]
 	if isinstance(children[0][0],str):
-		print(children[0][0],end="")
+		f.write(children[0][0])
 		return children[0]
 	else:
 		# each child is a possible path:
 		for child in children:
-			possible_path = []
 			# each id_ is a rule that has to be on this path:
-			print("(",end="")
+			if child != children[-1]:
+				f.write("(")
 			for id_ in child:
-				possible_path.append(find(rules,id_,path))
-			print(")",end="")
-			path.append(possible_path)
-		path.append(".")
-		return path
+				find(rules,id_)
+			if child != children[-1]:
+				f.write("|")
+			else:
+				f.write(")")
 
 
 
@@ -52,24 +52,26 @@ for item in L:
 	else:
 		messages.append(item)
 
-print("Rules:")
-for key in rules:
-	print(key,":",rules[key])
-print("\nMessages:")
+# write path to output.txt file:
+f = open("output.txt","w")
+path = find(rules, 0)
+f.close()
+
+# read back the path:
+f = open("output.txt","r")
+path = f.readline()
+f.close()
+
+# eliminate trailing parentheses:
+path = path.strip("(").strip(")")
+
+path += "\\" + "n"
+
+
+f = open("output2.txt","w")
+f.write("This is the regex expression:\n\n\n")
+f.write(path)
+
+f.write("\n\n\nThese are the expressions to match:\n\n\n")
 for message in messages:
-	print(message)
-
-path = find(rules, 0,[])
-
-print("\nPaths:")
-for step in path:
-	print(step)
-# Possible combinations:
-# aaaabb
-# aaabab
-# abbabb
-# abbbab
-# aabaab
-# aabbbb
-# abaaab
-# ababbb
+	f.write(message + "\n")
