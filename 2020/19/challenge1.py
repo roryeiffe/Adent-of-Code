@@ -10,14 +10,14 @@ def find(rules, key):
 		# each child is a possible path:
 		for child in children:
 			# each id_ is a rule that has to be on this path:
-			if child != children[-1]:
+			if child == children[0]:
 				f.write("(")
 			for id_ in child:
 				find(rules,id_)
+			if child == children[-1]:
+				f.write(")")
 			if child != children[-1]:
 				f.write("|")
-			else:
-				f.write(")")
 
 
 
@@ -63,9 +63,9 @@ path = f.readline()
 f.close()
 
 # eliminate trailing parentheses:
-path = path.strip("(").strip(")")
+# path = path.strip("(").strip(")")
 
-path += "\\" + "n"
+path = "\\" + "n" + path + "\\" + "n"
 
 
 f = open("output2.txt","w")
@@ -75,3 +75,5 @@ f.write(path)
 f.write("\n\n\nThese are the expressions to match:\n\n\n")
 for message in messages:
 	f.write(message + "\n")
+
+# Correct answer: 144

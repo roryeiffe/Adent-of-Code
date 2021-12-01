@@ -74,7 +74,7 @@ for id in buses:
 buses = temp
 
 for bus in buses:
-	print("((N mod {}) + {}) mod {} == 0".format(bus.id, bus.index% bus.id, bus.id))
+	print("((N mod {}) + {}) mod {} == 0".format(bus.id, bus.index % bus.id, bus.id))
 # We need to find a number N such that, for each bus in buses:
 # N + buses.index is divisible by buses.id
 # N + buses.index % buses.id == 0

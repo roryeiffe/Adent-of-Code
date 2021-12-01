@@ -36,5 +36,5 @@ a((aa)(bb)(ab)(ba))((ab)(ba)(aa)(bb))b
 
 a((aa|bb)(ab|ba)|(ab|ba)(aa|bb))b\n
 
-a((aa|(bb)(ab|(ba)|((ab|(ba)(aa|(bb))b
+a((aa|bb)(ab|ba)|(ab|ba)(aa|bb))b
 
