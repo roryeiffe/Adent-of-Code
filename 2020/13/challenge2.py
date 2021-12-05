@@ -78,6 +78,8 @@ for bus in buses:
 # We need to find a number N such that, for each bus in buses:
 # N + buses.index is divisible by buses.id
 # N + buses.index % buses.id == 0
+def find_N(buses):
+	
 
 answer = 0 
 while(True):

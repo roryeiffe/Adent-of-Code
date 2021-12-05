@@ -17,6 +17,10 @@ class bus:
 		else:
 			return False
 
+def print_buses(buses):
+	for bus in buses:
+		print(bus)
+
 f = open(sys.argv[1])
 earliest_time = int(f.readline().strip())
 buses = f.readline().strip().split(",")
@@ -30,13 +34,45 @@ for id in buses:
 
 buses = temp
 
+# for bus in buses:
+# 	print(str(bus))
+
+def check_buses(buses, N):
+	for bus in buses:
+		if ((N + bus.index) % bus.id) != 0:
+			return False
+	return True
+
+buses.pop(0)
+print_buses(buses)
+def findN(buses):
+	N = 0
+	while True:
+		if check_buses(buses,N):
+			return N
+		N += 19
+N = findN(buses)
+print(N)
+
 """
+N = 1068781
 
 N % 7 == 0
 N % 13 == 1
 N % 59 == 4
 N % 31 == 6
 N % 19 == 7
+
+7 * X = N
+
+
+13 * Y + 1 = N
+59 * Z + 4 = N
+
+13Y + 1 = 59Z + 4
+13Y = 59Z + 3
+
+
 
 N % 7 == 0
 (N - 1) % 13 == 0
